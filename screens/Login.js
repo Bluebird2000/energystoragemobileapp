@@ -1,40 +1,68 @@
 import React, { Component } from 'react'
-import { ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native'
-
+import {Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import axios from 'axios';
 import { Button, Block, Input, Text } from '../components';
 import { theme } from '../constants';
 
-const VALID_EMAIL = "";
-const VALID_PASSWORD = "default111";
-
 export default class LoginController extends Component {
   state = {
-    email: VALID_EMAIL,
-    password: VALID_PASSWORD,
+    email: null,
+    password: null,
     errors: [],
     loading: false,
   }
 
   handleLogin() {
     const { navigation } = this.props;
-    const { email, password } = this.state;
+    const { username, password } = this.state;
     const errors = [];
+    let payload = { username, password };
 
     Keyboard.dismiss();
     this.setState({ loading: true });
 
-    // check with backend API or with some static data
-    if (email !== VALID_EMAIL) {
-      errors.push('email');
-    }
-    if (password !== VALID_PASSWORD) {
-      errors.push('password');
-    }
+    if (!username) errors.push('username');
+    if (!password) errors.push('password');
 
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      navigation.navigate("");
+      // navigation.navigate("");
+      axios({
+        url: "https://p-user-api-dev.quabbly.com/v1/auth/login",
+        method: "post",
+        data: payload,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+      }).then(response => {
+          Alert.alert(
+          'Success!',
+          'successfully logged in',
+          [
+            {
+              text: 'Continue', onPress: () => {
+                navigation.navigate('Verification')
+              }
+            }
+          ],
+          { cancelable: false }
+        )
+      }).catch(error => {
+          Alert.alert(
+          'Failure!',
+          'invalid credentials',
+          [
+            {
+              text: 'Try again', onPress: () => {
+                navigation.navigate('Login')
+              }
+            }
+          ],
+          { cancelable: false }
+        )
+      })
     }
   }
 
@@ -50,10 +78,10 @@ export default class LoginController extends Component {
           <Block middle>
             <Input
               label="Email"
-              error={hasErrors('email')}
-              style={[styles.input, hasErrors('email')]}
-              defaultValue={this.state.email}
-              onChangeText={text => this.setState({ email: text })}
+              error={hasErrors('username')}
+              style={[styles.input, hasErrors('username')]}
+              defaultValue={this.state.username}
+              onChangeText={text => this.setState({ username: text.trim() })}
             />
             <Input
               secure
@@ -61,7 +89,7 @@ export default class LoginController extends Component {
               error={hasErrors('password')}
               style={[styles.input, hasErrors('password')]}
               defaultValue={this.state.password}
-              onChangeText={text => this.setState({ password: text })}
+              onChangeText={text => this.setState({ password: text.trim() })}
             />
             <Button gradient onPress={() => this.handleLogin()}>
               {loading ?

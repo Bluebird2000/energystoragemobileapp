@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView } from 'react-native';
-
+import axios from 'axios';
 import { Button, Block, Input, Text } from '../components';
 import { theme } from '../constants';
 
@@ -16,18 +16,18 @@ export default class SignUp extends Component {
   }
 
   handleSignUp() {
-    const baseUrl = 'localhost:7000/v1/energy/auth/register';
+    const baseUrl = 'http://41.58.77.220:7000/v1/energy/auth/register';
     const { navigation } = this.props;
     const errors = [];
     //creating data object to be sent to API
-    const { firstname, lastname, email, password, wattbankSN } = this.state;
-
+    const { firstName, lastName, email, password, wattbankSN } = this.state;
+    const payload = { firstName, lastName, email, password, wattbankSN }
     Keyboard.dismiss();
     this.setState({ loading: true });
 
     // check with backend API or with some static data
-    if (!firstname) errors.push('firstname');
-    if (!lastname) errors.push('lastname');
+    if (!firstName) errors.push('firstName');
+    if (!lastName) errors.push('lastName');
     if (!email) errors.push('email');
     if (!password) errors.push('password');
     if (!wattbankSN) errors.push('wattbankSN');
@@ -35,19 +35,61 @@ export default class SignUp extends Component {
     this.setState({ errors, loading: false });
 
     if (!errors.length) {
-      Alert.alert(
-        'Success!',
-        'Your account has been created',
-        [
-          {
-            text: 'Continue', onPress: () => {
-              navigation.navigate('Verification')
-            }
-          }
-        ],
-        { cancelable: false }
-      )
+      axios({
+        url: baseUrl,
+        method: "post",
+        data: payload,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }).then(response => { Alert.alert( 'Success!' + response, 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
+          { cancelable: false })
+          }).catch(error => {
+            Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
+          })
+      
+      // axios({
+      //   url: baseUrl,
+      //   method: "post",
+      //   data: payload,
+      //   headers: {
+      //     'Accept': 'application/json',
+      //     'Content-Type': 'application/json'
+      //   }
+      // }).then(response => {
+      //   console.log(2, response);
+      //   Alert.alert(
+      //   'Success!',
+      //   'Your account has been created',
+      //   [
+      //     {
+      //       text: 'Continue', onPress: () => {
+      //         navigation.navigate('Verification')
+      //       }
+      //     }
+      //   ],
+      //   { cancelable: false }
+      // )
+      // }).catch(error => {
+      //   console.log(1, error.response);
+      // })
+      // Alert.alert(
+      //   'Success!',
+      //   'Your account has been created',
+      //   [
+      //     {
+      //       text: 'Continue', onPress: () => {
+      //         navigation.navigate('Verification')
+      //       }
+      //     }
+      //   ],
+      //   { cancelable: false }
+      // )
     }
+
+
+
   }
 
   render() {
@@ -63,17 +105,17 @@ export default class SignUp extends Component {
           <Block middle>
             <Input
               label="Firstname"
-              error={hasErrors('lastname')}
-              style={[styles.input, hasErrors('firstname')]}
-              defaultValue={this.state.firstname}
-              onChangeText={text => this.setState({ firstname: text })}
+              error={hasErrors('firstName')}
+              style={[styles.input, hasErrors('firstName')]}
+              defaultValue={this.state.firstName}
+              onChangeText={text => this.setState({ firstName: text })}
             />
             <Input
               label="Lastname"
               error={hasErrors('lastName')}
               style={[styles.input, hasErrors('lastName')]}
-              defaultValue={this.state.lastname}
-              onChangeText={text => this.setState({ lastname: text })}
+              defaultValue={this.state.lastName}
+              onChangeText={text => this.setState({ lastName: text })}
             />
             <Input
               email
