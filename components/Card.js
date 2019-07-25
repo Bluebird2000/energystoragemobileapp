@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 
-import Block from './Block';
+import CreateDivElement from './CreateDivElement';
 import { theme } from '../constants';
 
 export default class Card extends Component {
@@ -13,9 +13,9 @@ export default class Card extends Component {
     ];
 
     return (
-      <Block color={color || theme.colors.white} style={cardStyles} {...props}>
+      <CreateDivElement color={color || theme.colors.white} style={cardStyles} {...props}>
         {children}
-      </Block>
+      </CreateDivElement>
     )
   }
 }

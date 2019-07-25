@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Dimensions, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 
-import { Card, Badge, Button, Block, Text } from '../components';
+import { Card, Badge, Button, CreateDivElement,  Text } from '../components';
 import { theme, mocks } from '../constants';
 
 const { width } = Dimensions.get('window');
@@ -51,8 +51,8 @@ class DashBoard extends Component {
     const tabs = ['Units', 'View-consumption', 'Connected-devices'];
 
     return (
-      <Block>
-        <Block flex={false} row center space="between" style={styles.header}>
+      <CreateDivElement>
+        <CreateDivElement flex={false} row center space="between" style={styles.header}>
           <Text h1 bold> DashBoard </Text>
           <Button onPress={() => navigation.navigate('Settings')}>
             <Image
@@ -60,17 +60,17 @@ class DashBoard extends Component {
               style={styles.avatar}
             />
           </Button>
-        </Block>
+        </CreateDivElement>
 
-        <Block flex={false} row style={styles.tabs}>
+        <CreateDivElement flex={false} row style={styles.tabs}>
           {tabs.map(tab => this.renderTab(tab))}
-        </Block>
+        </CreateDivElement>
 
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={{ paddingVertical: theme.sizes.base * 2}}
         >
-          <Block flex={false} row space="between" style={styles.httpMock}>
+          <CreateDivElement flex={false} row space="between" style={styles.httpMock}>
             {httpMock.map(category => (
               <TouchableOpacity
                 key={category.name}
@@ -85,9 +85,9 @@ class DashBoard extends Component {
                 </Card>
               </TouchableOpacity>
             ))}
-          </Block>
+          </CreateDivElement>
         </ScrollView>
-      </Block>
+      </CreateDivElement>
     )
   }
 }

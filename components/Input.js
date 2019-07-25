@@ -3,7 +3,7 @@ import { StyleSheet, TextInput } from 'react-native'
 import { Icon } from 'expo';
 
 import Text from './Text';
-import Block from './Block';
+import CreateDivElement from './CreateDivElement';
 import Button from './Button';
 import { theme } from '../constants';
 
@@ -16,9 +16,9 @@ export default class Input extends Component {
     const { label, error } = this.props;
 
     return (
-      <Block flex={false}>
+      <CreateDivElement flex={false}>
         {label ? <Text gray2={!error} accent={error}>{label}</Text> : null}
-      </Block>
+      </CreateDivElement>
     )
   }
 
@@ -86,7 +86,7 @@ export default class Input extends Component {
       ? 'phone-pad' : 'default';
 
     return (
-      <Block flex={false} margin={[theme.sizes.base, 0]}>
+      <CreateDivElement flex={false} margin={[theme.sizes.base, 0]}>
         {this.renderLabel()}
         <TextInput
           style={inputStyles}
@@ -99,7 +99,7 @@ export default class Input extends Component {
         />
         {this.renderToggle()}
         {this.renderRight()}
-      </Block>
+      </CreateDivElement>
     )
   }
 }

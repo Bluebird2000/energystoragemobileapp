@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Dimensions, Image, FlatList, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons';
 
-import { Button, Divider, Input, Block, Text } from '../components';
+import { Button, Divider, Input, CreateDivElement, Text } from '../components';
 import { theme, mocks } from '../constants';
 
 const { width, height } = Dimensions.get('window');
@@ -47,22 +47,22 @@ class Product extends Component {
       <ScrollView showsVerticalScrollIndicator={false}>
         {this.renderGallery()}
 
-        <Block style={styles.product}>
+        <CreateDivElement style={styles.product}>
           <Text h2 bold>{product.name}</Text>
-          <Block flex={false} row margin={[theme.sizes.base, 0]}>
+          <CreateDivElement flex={false} row margin={[theme.sizes.base, 0]}>
             {product.tags.map(tag => (
               <Text key={`tag-${tag}`} caption gray style={styles.tag}>
                 {tag}
               </Text>
             ))}
-          </Block>
+          </CreateDivElement>
           <Text gray light height={22}>{product.description}</Text>
           
           <Divider margin={[theme.sizes.padding * 0.9, 0]} />
           
-          <Block>
+          <CreateDivElement>
             <Text semibold>Gallery</Text>
-            <Block row margin={[theme.sizes.padding * 0.9, 0]}>
+            <CreateDivElement row margin={[theme.sizes.padding * 0.9, 0]}>
               {product.images.slice(1, 3).map(
                 (image, index) => (
                   <Image
@@ -72,7 +72,7 @@ class Product extends Component {
                   />
                 )
               )}
-              <Block
+              <CreateDivElement
                 flex={false}
                 card
                 center
@@ -81,10 +81,10 @@ class Product extends Component {
                 style={styles.more}
               >
                 <Text gray>+{product.images.slice(3).length}</Text>
-              </Block>
-            </Block>
-          </Block>
-        </Block>
+              </CreateDivElement>
+            </CreateDivElement>
+          </CreateDivElement>
+        </CreateDivElement>
       </ScrollView>
     )
   }

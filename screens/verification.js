@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Animated, StyleSheet } from 'react-native';
 
-import { Button, Block, Text } from '../components';
+import { Button, Text, CreateDivElement} from '../components';
 import { theme } from '../constants';
 
 
@@ -17,18 +17,18 @@ class Verification extends Component {
   render() {
     const { navigation } = this.props;
     return (
-      <Block> 
-        <Block center bottom flex={0.4} >
+      <CreateDivElement> 
+        <CreateDivElement center bottom flex={0.4} >
           <Text h1 center bold>
             Your account has been successfully verified
           </Text>
-        </Block>
-        <Block middle flex={0.5} margin={[0, theme.sizes.padding * 1]}>
+        </CreateDivElement>
+        <CreateDivElement middle flex={0.5} margin={[0, theme.sizes.padding * 1]}>
           <Button style={styles.loginAction} onPress={() => navigation.navigate('Login')}>
             <Text center semibold white>Login</Text>
           </Button>
-        </Block>
-      </Block>
+        </CreateDivElement>
+      </CreateDivElement>
     )
   }
 }

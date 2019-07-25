@@ -3,7 +3,8 @@ import { Animated, Dimensions, Image, StyleSheet, ScrollView, TouchableOpacity }
 import Icon from 'react-native-vector-icons';
 import { LinearGradient } from 'expo';
 
-import { Button, Input, Block, Text } from '../components';
+import { Button, Input, CreateDivElement, Text } from '../components';
+
 import { theme, mocks } from '../constants';
 
 const { width, height } = Dimensions.get('window');
@@ -29,7 +30,7 @@ class Explore extends Component {
     const isEditing = searchFocus && searchString;
 
     return (
-      <Block animated middle flex={searchFocus} style={styles.search}>
+      <CreateDivElement animated middle flex={searchFocus} style={styles.search}>
         <Input
           placeholder="Search"
           placeholderTextColor={theme.colors.gray2}
@@ -49,7 +50,7 @@ class Explore extends Component {
             />
           }
         />
-      </Block>
+      </CreateDivElement>
     )
   }
 
@@ -81,19 +82,19 @@ class Explore extends Component {
     const mainImage = images[0];
 
     return (
-      <Block style={{ marginBottom: height / 3 }}>
+      <CreateDivElement style={{ marginBottom: height / 3 }}>
         <TouchableOpacity
           style={[ styles.image, styles.mainImage ]}
           onPress={() => navigation.navigate('Product')}
         >
           <Image source={mainImage} style={[styles.image, styles.mainImage]} />
         </TouchableOpacity>
-        <Block row space="between" wrap>
+        <CreateDivElement row space="between" wrap>
           {
             images.slice(1).map((img, index) => this.renderImage(img, index))
           }
-        </Block>
-      </Block>
+        </CreateDivElement>
+      </CreateDivElement>
     )
   }
 
@@ -113,18 +114,18 @@ class Explore extends Component {
 
   render() {
     return (
-      <Block>
-        <Block flex={false} row center space="between" style={styles.header}>
+      <CreateDivElement>
+        <CreateDivElement flex={false} row center space="between" style={styles.header}>
           <Text h1 bold>Explore</Text>
           {this.renderSearch()}
-        </Block>
+        </CreateDivElement>
 
         <ScrollView showsVerticalScrollIndicator={false} style={styles.explore}>
           {this.renderExplore()}
         </ScrollView>
 
         {this.renderFooter()}
-      </Block>
+      </CreateDivElement>
     )
   }
 }

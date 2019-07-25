@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native';
 
-import { Button, Block, Input, Text } from '../components';
+import { Button, Input, CreateDivElement, Text } from '../components';
+
 import { theme } from '../constants';
 
 const VALID_EMAIL = "ahmad.saka@photizzo.com";
@@ -60,9 +61,9 @@ export default class Forgot extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.forgot} behavior="padding">
-        <Block padding={[0, theme.sizes.base * 2]}>
+        <CreateDivElement padding={[0, theme.sizes.base * 2]}>
           {/* <Text h1 bold>Forgot</Text> */}
-          <Block middle>
+          <CreateDivElement middle>
             <Input
               label="Email"
               error={hasErrors('email')}
@@ -82,8 +83,8 @@ export default class Forgot extends Component {
                 Back to Login
               </Text>
             </Button>
-          </Block>
-        </Block>
+          </CreateDivElement>
+        </CreateDivElement>
       </KeyboardAvoidingView>
     )
   }

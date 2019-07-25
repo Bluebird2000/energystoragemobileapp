@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Animated, Dimensions, Image, FlatList, Modal, StyleSheet, ScrollView } from 'react-native';
 
-import { Button, Block, Text } from '../components';
+import { Button, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
 
 const { width, height } = Dimensions.get('window');
@@ -20,7 +20,7 @@ class Welcome extends Component {
   renderTermsService() {
     return (
       <Modal animationType="slide" visible={this.state.showTerms} onRequestClose={() => this.setState({ showTerms: false })}>
-        <Block padding={[theme.sizes.padding * 2, theme.sizes.padding]} space="between">
+        <CreateDivElement padding={[theme.sizes.padding * 2, theme.sizes.padding]} space="between">
           <Text h2 light>Terms of Service</Text>
 
           <ScrollView style={{ marginVertical: theme.sizes.padding }}>
@@ -40,7 +40,7 @@ class Welcome extends Component {
               5. Your appliances will love the pure sine wave output of Wattbank U+ which gives them longer life
             </Text>
             <Text caption gray height={24} style={{ marginBottom: theme.sizes.base }}>
-              6. Wattbank U+ protects your appliances by blocking voltage surges and short circuits through its in-built safety mechanisms
+              6. Wattbank U+ protects your appliances by CreateDivElementing voltage surges and short circuits through its in-built safety mechanisms
             </Text>
             <Text caption gray height={24} style={{ marginBottom: theme.sizes.base }}>
               7. The Wattbank U+ operates in uninterruptible power supply mode, hence if there is a grid outage / power failure, the Wattbank U+ continuously supplies power without any noticeable break
@@ -52,16 +52,16 @@ class Welcome extends Component {
               9. Wattbank U+ uses lithium ion battery technology which is safe for environment
             </Text>
             <Text caption gray height={24} style={{ marginBottom: theme.sizes.base }}>
-              10. Wattbank S protects your appliances by blocking voltage surges and short circuits through its in-built safety mechanisms
+              10. Wattbank S protects your appliances by CreateDivElementing voltage surges and short circuits through its in-built safety mechanisms
             </Text>
           </ScrollView>
 
-          <Block middle padding={[theme.sizes.base / 2, 0]}>
+          <CreateDivElement middle padding={[theme.sizes.base / 2, 0]}>
             <Button gradient onPress={() => this.setState({ showTerms: false })}>
               <Text center white>I understand</Text>
             </Button>
-          </Block>
-        </Block>
+          </CreateDivElement>
+        </CreateDivElement>
       </Modal>
     )
   }
@@ -100,7 +100,7 @@ class Welcome extends Component {
     const { illustrations } = this.props;
     const stepPosition = Animated.divide(this.scrollX, width);
     return (
-      <Block row center middle style={styles.stepsContainer}>
+      <CreateDivElement row center middle style={styles.stepsContainer}>
         {illustrations.map((item, index) => {
           const opacity = stepPosition.interpolate({
             inputRange: [index - 1, index, index + 1],
@@ -109,7 +109,7 @@ class Welcome extends Component {
           });
 
           return (
-            <Block
+            <CreateDivElement
               animated
               flex={false}
               key={`step-${index}`}
@@ -118,7 +118,7 @@ class Welcome extends Component {
             />
           )
         })}
-      </Block>
+      </CreateDivElement>
     )
   }
   
@@ -126,8 +126,8 @@ class Welcome extends Component {
     const { navigation } = this.props;
 
     return (
-      <Block> 
-        <Block center bottom flex={0.4} >
+      <CreateDivElement> 
+        <CreateDivElement center bottom flex={0.4} >
           {/* <Text h1 center bold>
             Energy storage for your
             <Text h1 primary> Home</Text>
@@ -135,12 +135,12 @@ class Welcome extends Component {
           <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
             Making electronics manufacturing unbiquitous
           </Text> */}
-        </Block>
-        {/* <Block center middle>
+        </CreateDivElement>
+        {/* <CreateDivElement center middle>
           {this.renderIllustrations()}
           {this.renderSteps()}
-        </Block> */}
-        <Block middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
+        </CreateDivElement> */}
+        <CreateDivElement middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
           <Button style={styles.loginAction} onPress={() => navigation.navigate('Login')}>
             <Text center semibold white>Login</Text>
           </Button>
@@ -150,9 +150,9 @@ class Welcome extends Component {
           <Button onPress={() => this.setState({ showTerms: true })}>
             <Text center caption gray>Terms of service</Text>
           </Button>
-        </Block>
+        </CreateDivElement>
         {this.renderTermsService()}
-      </Block>
+      </CreateDivElement>
     )
   }
 }

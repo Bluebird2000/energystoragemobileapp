@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native'
 import axios from 'axios';
-import { Button, Block, Input, Text } from '../components';
+import { Button, Input, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
 
 export default class LoginController extends Component {
@@ -73,9 +73,9 @@ export default class LoginController extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <Block padding={[0, theme.sizes.base * 2]}>
+        <CreateDivElement padding={[0, theme.sizes.base * 2]}>
           {/* <Text h1 bold>Login</Text> */}
-          <Block middle>
+          <CreateDivElement middle>
             <Input
               label="Email"
               error={hasErrors('username')}
@@ -103,8 +103,8 @@ export default class LoginController extends Component {
                 Forgot your password?
               </Text>
             </Button>
-          </Block>
-        </Block>
+          </CreateDivElement>
+        </CreateDivElement>
       </KeyboardAvoidingView>
     )
   }

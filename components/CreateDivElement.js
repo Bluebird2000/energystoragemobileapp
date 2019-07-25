@@ -3,7 +3,7 @@ import { StyleSheet, View, Animated } from 'react-native'
 
 import { theme } from '../constants';
 
-export default class Block extends Component {
+export default class CreateDivElement extends Component {
   handleMargins() {
     const { margin } = this.props;
     if (typeof margin === 'number') {

@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo';
 
-import Block from './Block';
+import CreateDivElement from './CreateDivElement';
 
 class Progress extends Component {
   render() {
     const { startColor, endColor, value, opacity, style, ...props } = this.props;
 
     return (
-      <Block row center color="gray3" style={[styles.background, styles]} {...props}>
+      <CreateDivElement row center color="gray3" style={[styles.background, styles]} {...props}>
         <LinearGradient
           end={{ x: 1, y: 0 }}
           style={[styles.overlay, { flex: value }]}
@@ -21,7 +21,7 @@ class Progress extends Component {
             style={[styles.active, { flex: value }]}
           />
         </LinearGradient>
-      </Block>
+      </CreateDivElement>
     )
   }
 }

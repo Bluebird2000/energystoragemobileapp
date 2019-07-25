@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { AppLoading, Asset } from 'expo';
 
-import Navigation from './navigation';
-import { Block } from './components';
+import Navigation from './navigation/routing';
+import CreateDivElement  from './components/CreateDivElement';
 
 // import all used images
 const images = [
@@ -58,9 +58,9 @@ export default class App extends React.Component {
     }
 
     return (
-      <Block white>
+      <CreateDivElement white>
         <Navigation />
-      </Block>
+      </CreateDivElement>
     );
   }
 }

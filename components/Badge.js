@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 
-import Block from './Block';
+import CreateDivElement from './CreateDivElement';
 import { theme } from '../constants';
 
 export default class Badge extends Component {
@@ -19,9 +19,9 @@ export default class Badge extends Component {
     ]);
 
     return (
-      <Block flex={false} middle center color={color} style={badgeStyles} {...props}>
+      <CreateDivElement flex={false} middle center color={color} style={badgeStyles} {...props}>
         {children}
-      </Block>
+      </CreateDivElement>
     )
   }
 }

@@ -1,4 +1,4 @@
-import Block from "./Block";
+import CreateDivElement from "./CreateDivElement";
 import Badge from "./Badge";
 import Button from "./Button";
 import Card from "./Card";
@@ -8,4 +8,4 @@ import Progress from "./Progress";
 import Divider from "./Divider";
 import Switch from "./Switch";
 
-export { Block, Badge, Button, Card, Input, Text, Progress, Divider, Switch };
+export { CreateDivElement, Badge, Button, Card, Input, Text, Progress, Divider, Switch };

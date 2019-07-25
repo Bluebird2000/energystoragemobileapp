@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Image, StyleSheet, ScrollView, TextInput } from 'react-native'
 import Slider from 'react-native-slider';
 
-import { Divider, Button, Block, Text, Switch } from '../components';
+import { Divider, Button, CreateDivElement, Text, Switch } from '../components';
 import { theme, mocks } from '../constants';
 
 class Units extends Component {
@@ -50,20 +50,20 @@ class Units extends Component {
     const { profile, editing } = this.state;
 
     return (
-      <Block>
-        <Block flex={false} row center space="between" style={styles.header}>
+      <CreateDivElement>
+        <CreateDivElement flex={false} row center space="between" style={styles.header}>
           <Text h3 bold>Unit Consumption</Text>
           <Button>
             <Text h5 bold>July-23-2019</Text>
           </Button>
-        </Block>
+        </CreateDivElement>
 
         <ScrollView showsVerticalScrollIndicator={false}>
 
           <Divider margin={[theme.sizes.base, theme.sizes.base * 2]} />
 
-          <Block style={styles.sliders}>
-            <Block margin={[10, 0]}>
+          <CreateDivElement style={styles.sliders}>
+            <CreateDivElement margin={[10, 0]}>
               <Text gray2 style={{ marginBottom: 10 }}> loadCurrent </Text>
               <Slider
                 minimumValue={0}
@@ -77,8 +77,8 @@ class Units extends Component {
                 onValueChange={value => this.setState({ budget: value })}
               />
               <Text caption gray right>%100</Text>
-            </Block>
-            <Block margin={[10, 0]}>
+            </CreateDivElement>
+            <CreateDivElement margin={[10, 0]}>
               <Text gray2 style={{ marginBottom: 10 }}> chargingCurrent </Text>
               <Slider
                 minimumValue={0}
@@ -92,8 +92,8 @@ class Units extends Component {
                 onValueChange={value => this.setState({ monthly: value })}
               />
               <Text caption gray right>%100</Text>
-            </Block>
-            <Block margin={[10, 0]}>
+            </CreateDivElement>
+            <CreateDivElement margin={[10, 0]}>
               <Text gray2 style={{ marginBottom: 10 }}> batteryVoltage </Text>
               <Slider
                 minimumValue={0}
@@ -107,31 +107,31 @@ class Units extends Component {
                 onValueChange={value => this.setState({ monthly: value })}
               />
               <Text caption gray right>%100</Text>
-            </Block>
-          </Block>
+            </CreateDivElement>
+          </CreateDivElement>
 
           <Divider />
 
-          <Block style={styles.toggles}>
-            <Block row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
+          <CreateDivElement style={styles.toggles}>
+            <CreateDivElement row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
               <Text gray2>Notifications</Text>
               <Switch
                 value={this.state.notifications}
                 onValueChange={value => this.setState({ notifications: value })}
               />
-            </Block>
+            </CreateDivElement>
             
-            <Block row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
+            <CreateDivElement row center space="between" style={{ marginBottom: theme.sizes.base * 2 }}>
               <Text gray2>Newsletter</Text>
               <Switch
                 value={this.state.newsletter}
                 onValueChange={value => this.setState({ newsletter: value })}
               />
-            </Block>
-          </Block>
+            </CreateDivElement>
+          </CreateDivElement>
 
         </ScrollView>
-      </Block>
+      </CreateDivElement>
     )
   }
 }
