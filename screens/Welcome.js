@@ -128,13 +128,13 @@ class Welcome extends Component {
     return (
       <Block> 
         <Block center bottom flex={0.4} >
-          <Text h1 center bold>
+          {/* <Text h1 center bold>
             Energy storage for your
             <Text h1 primary> Home</Text>
           </Text>
           <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
             Making electronics manufacturing unbiquitous
-          </Text>
+          </Text> */}
         </Block>
         {/* <Block center middle>
           {this.renderIllustrations()}

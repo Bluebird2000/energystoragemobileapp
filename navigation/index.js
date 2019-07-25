@@ -7,15 +7,16 @@ import Login from '../screens/Login';
 import SignUp from '../screens/SignUp';
 import Forgot from '../screens/Forgot';
 import Explore from '../screens/Explore';
-import Browse from '../screens/Browse';
+import DashBoard from '../screens/Dashboard';
 import Product from '../screens/Product';
 import Settings from '../screens/Settings';
+import Units from '../screens/Unit';
 import Verification from '../screens/verification';
 
 import { theme } from '../constants';
 
 const screens = createStackNavigator(
-  { Welcome, Login, SignUp, Forgot, Explore, Browse, Product, Settings, Verification }, {
+  { Welcome, Login, SignUp, Forgot, Explore, DashBoard, Product, Settings, Units, Verification }, {
   defaultNavigationOptions: {
     headerStyle: {
       height: theme.sizes.base * 4,

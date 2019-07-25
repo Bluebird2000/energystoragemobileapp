@@ -24,10 +24,9 @@ export default class LoginController extends Component {
     if (!username) errors.push('username');
     if (!password) errors.push('password');
 
-    this.setState({ errors, loading: false });
+    this.setState({ errors, loading: false });   
 
     if (!errors.length) {
-      // navigation.navigate("");
       axios({
         url: "https://p-user-api-dev.quabbly.com/v1/auth/login",
         method: "post",
@@ -43,7 +42,7 @@ export default class LoginController extends Component {
           [
             {
               text: 'Continue', onPress: () => {
-                navigation.navigate('Verification')
+                navigation.navigate('DashBoard')
               }
             }
           ],
@@ -64,6 +63,7 @@ export default class LoginController extends Component {
         )
       })
     }
+
   }
 
   render() {
@@ -91,7 +91,7 @@ export default class LoginController extends Component {
               defaultValue={this.state.password}
               onChangeText={text => this.setState({ password: text.trim() })}
             />
-            <Button gradient onPress={() => this.handleLogin()}>
+            <Button style={styles.loginAction} onPress={() => this.handleLogin()}>
               {loading ?
                 <ActivityIndicator size="small" color="white" /> : 
                 <Text bold white center>Login</Text>
@@ -123,5 +123,8 @@ const styles = StyleSheet.create({
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent,
+  },
+  loginAction: {
+    backgroundColor: '#00b1ac'
   }
 })

@@ -91,7 +91,7 @@ class Product extends Component {
 }
 
 Product.defaultProps = {
-  product: mocks.products[0],
+  product: mocks.units[0],
 }
 
 export default Product;

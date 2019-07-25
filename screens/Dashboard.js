@@ -6,23 +6,23 @@ import { theme, mocks } from '../constants';
 
 const { width } = Dimensions.get('window');
 
-class Browse extends Component {
+class DashBoard extends Component {
   state = {
     active: 'Products',
-    categories: [],
+    httpMock: [],
   }
 
   componentDidMount() {
-    this.setState({ categories: this.props.categories });
+    this.setState({ httpMock: this.props.httpMock });
   }
 
   handleTab = tab => {
-    const { categories } = this.props;
-    const filtered = categories.filter(
+    const { httpMock } = this.props;
+    const filtered = httpMock.filter(
       category => category.tags.includes(tab.toLowerCase())
     );
 
-    this.setState({ active: tab, categories: filtered });
+    this.setState({ active: tab, httpMock: filtered });
   }
 
   renderTab(tab) {
@@ -47,16 +47,16 @@ class Browse extends Component {
 
   render() {
     const { profile, navigation } = this.props;
-    const { categories } = this.state;
-    const tabs = ['Products', 'Inspirations', 'Shop'];
+    const { httpMock } = this.state;
+    const tabs = ['Units', 'View-consumption', 'Connected-devices'];
 
     return (
       <Block>
         <Block flex={false} row center space="between" style={styles.header}>
-          <Text h1 bold>Browse</Text>
+          <Text h1 bold> DashBoard </Text>
           <Button onPress={() => navigation.navigate('Settings')}>
             <Image
-              source={profile.avatar}
+              // source={profile.avatar}
               style={styles.avatar}
             />
           </Button>
@@ -70,18 +70,18 @@ class Browse extends Component {
           showsVerticalScrollIndicator={false}
           style={{ paddingVertical: theme.sizes.base * 2}}
         >
-          <Block flex={false} row space="between" style={styles.categories}>
-            {categories.map(category => (
+          <Block flex={false} row space="between" style={styles.httpMock}>
+            {httpMock.map(category => (
               <TouchableOpacity
                 key={category.name}
-                onPress={() => navigation.navigate('Explore', { category })}
+                onPress={() => navigation.navigate('Units', { category })}
               >
                 <Card center middle shadow style={styles.category}>
+                <Text medium height={20}>{category.name}</Text>
+                  <Text gray caption>{category.count} products</Text>
                   <Badge margin={[0, 0, 15]} size={50} color="rgba(41,216,143,0.20)">
                     <Image source={category.image} />
                   </Badge>
-                  <Text medium height={20}>{category.name}</Text>
-                  <Text gray caption>{category.count} products</Text>
                 </Card>
               </TouchableOpacity>
             ))}
@@ -92,12 +92,12 @@ class Browse extends Component {
   }
 }
 
-Browse.defaultProps = {
+DashBoard.defaultProps = {
   profile: mocks.profile,
-  categories: mocks.categories,
+  httpMock: mocks.httpMock,
 }
 
-export default Browse;
+export default DashBoard;
 
 const styles = StyleSheet.create({
   header: {
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderBottomColor: theme.colors.secondary,
     borderBottomWidth: 3,
   },
-  categories: {
+  httpMock: {
     flexWrap: 'wrap',
     paddingHorizontal: theme.sizes.base * 2,
     marginBottom: theme.sizes.base * 3.5,
