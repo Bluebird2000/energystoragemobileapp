@@ -73,8 +73,14 @@ export default class LoginController extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.login} behavior="padding">
-        <CreateDivElement padding={[0, theme.sizes.base * 2]}>
+        <CreateDivElement padding={[0, theme.sizes.base * 3]}>
           {/* <Text h1 bold>Login</Text> */}
+            <CreateDivElement center bottom flex={0.4} >
+            <Text h1 center bold>
+              Wattbank For Your
+              <Text h1 primary> Home</Text>
+            </Text>
+          </CreateDivElement>
           <CreateDivElement middle>
             <Input
               label="Email"
@@ -91,14 +97,14 @@ export default class LoginController extends Component {
               defaultValue={this.state.password}
               onChangeText={text => this.setState({ password: text.trim() })}
             />
-            <Button style={styles.loginAction} onPress={() => this.handleLogin()}>
+            <Button style={styles.btnActionActive} onPress={() => this.handleLogin()}>
               {loading ?
                 <ActivityIndicator size="small" color="white" /> : 
                 <Text bold white center>Login</Text>
               }
             </Button>
 
-            <Button onPress={() => navigation.navigate('Forgot')}>
+            <Button  style={styles.btnActionNonActive} onPress={() => navigation.navigate('Forgot')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Forgot your password?
               </Text>
@@ -124,7 +130,10 @@ const styles = StyleSheet.create({
   hasErrors: {
     borderBottomColor: theme.colors.accent,
   },
-  loginAction: {
-    backgroundColor: '#00b1ac'
-  }
+  btnActionActive: {
+    backgroundColor: '#07b8ae'
+  },
+  btnActionNonActive: {
+    backgroundColor: '#eeeeee'
+  },
 })
