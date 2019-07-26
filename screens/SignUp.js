@@ -6,21 +6,14 @@ import { Button, Input, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
 
 export default class SignUp extends Component {
-  state = {
-    firstName: null,
-    lastName: null,
-    email: null,
-    password: null,
-    wattbankSN: null,
-    errors: [],
-    loading: false,
-  }
+  state = { firstName: null, lastName: null, email: null, password: null, wattbankSN: null, errors: [], loading: false }
 
   async handleSignUp() {
-    const { navigation } = this.props;
     const errors = [];
     const { firstName, lastName, email, password, wattbankSN } = this.state;
     const payload = { firstName, lastName, email, password, wattbankSN }
+    const baseUrl = 'http://192.168.15.254:7000/v1/energy/auth/register';
+    const { navigation } = this.props;
 
     if (!firstName) errors.push('firstName');
     if (!lastName) errors.push('lastName');
@@ -31,65 +24,27 @@ export default class SignUp extends Component {
 
     if(!errors.length) {
       this.setState({ loading: true });
-      const baseUrl = 'http://192.168.15.254:7000/v1/energy/auth/register';
-      await axios({
-        url: baseUrl,
-        method: 'POST',
-        data: payload,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }
-      }).then(response => { Alert.alert( 'Success!', 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
-          { cancelable: false })
-          }).catch(error => {
-            Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
-            this.setState({ loading: false });
-          });
+      await this.saveNewUserData(payload, baseUrl, navigation);
     }
   }
 
+  async saveNewUserData(payload, baseUrl, navigation) {
+    await axios({
+      url: baseUrl,
+      method: 'POST',
+      data: payload,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => { Alert.alert( 'Success!', 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }], { cancelable: false });
+          this.setState({ loading: false });
+        }).catch(error => {
+          Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
+          this.setState({ loading: false });
+        });
+  }
 
-
-
-    // const baseUrl = 'http://41.58.82.44:7000/v1/energy/auth/register';
-    // const { navigation } = this.props;
-    // const errors = [];
-    // //creating data object to be sent to API
-    // const { firstName, lastName, email, password, wattbankSN } = this.state;
-    // const payload = { firstName, lastName, email, password, wattbankSN }
-    // Keyboard.dismiss();
-    // this.setState({ loading: true });
-
-    // // check with backend API or with some static data
-    // if (!firstName) errors.push('firstName');
-    // if (!lastName) errors.push('lastName');
-    // if (!email) errors.push('email');
-    // if (!password) errors.push('password');
-    // if (!wattbankSN) errors.push('wattbankSN');
-
-    // this.setState({ errors, loading: false });
-
-
-    // if (!errors.length) {
-    //   axios({
-    //     url: baseUrl,
-    //     method: "post",
-    //     data: payload,
-    //     headers: {
-    //       'Accept': 'application/json',
-    //       'Content-Type': 'application/json'
-    //     }
-    //   }).then(response => { Alert.alert( 'Success!' + response, 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
-    //       { cancelable: false })
-    //       }).catch(error => {
-    //         Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
-    //       });
-    // }
-
-
-
-  // }
 
   render() {
     const { navigation } = this.props;

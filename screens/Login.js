@@ -5,18 +5,14 @@ import { Button, Input, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
 
 export default class LoginController extends Component {
-  state = {
-    email: null,
-    password: null,
-    errors: [],
-    loading: false,
-  }
+  state = { email: null, password: null,  errors: [], loading: false }
 
   async handleLogin() {
     const { navigation } = this.props;
     const { username, password } = this.state;
     const errors = [];
     let payload = { username, password };
+    const baseUrl = 'http://192.168.15.254:7000/v1/energy/auth/login';    
 
     Keyboard.dismiss();
 
@@ -26,8 +22,14 @@ export default class LoginController extends Component {
 
     if (!errors.length) {
       this.setState({ loading: true });
-     await axios({
-        url: "https://p-user-api-dev.quabbly.com/v1/auth/login",
+     await this.authenticateUserLoginDetails(payload, baseUrl, navigation);
+    }
+
+  }
+
+  async authenticateUserLoginDetails(payload, baseUrl, navigation) {
+    await axios({
+        url: baseUrl,
         method: "post",
         data: payload,
         headers: {
@@ -46,10 +48,11 @@ export default class LoginController extends Component {
             }
           ],
           { cancelable: false }
-        )
+        );
+        this.setState({ loading: false });
       }).catch(error => {
           Alert.alert(
-          'Failure!',
+          '',
           'invalid credentials',
           [
             {
@@ -62,10 +65,7 @@ export default class LoginController extends Component {
         );
         this.setState({ loading: false });
       })
-    }
-
   }
-
   render() {
     const { navigation } = this.props;
     const { loading, errors } = this.state;
