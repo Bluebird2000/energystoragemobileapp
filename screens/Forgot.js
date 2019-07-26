@@ -61,8 +61,14 @@ export default class Forgot extends Component {
 
     return (
       <KeyboardAvoidingView style={styles.forgot} behavior="padding">
-        <CreateDivElement padding={[0, theme.sizes.base * 2]}>
+        <CreateDivElement padding={[0, theme.sizes.base * 3]}>
           {/* <Text h1 bold>Forgot</Text> */}
+          <CreateDivElement center bottom flex={0.4} >
+            <Text h1 center bold>
+              Wattbank For Your
+              <Text h1 primary> Home</Text>
+            </Text>
+          </CreateDivElement>
           <CreateDivElement middle>
             <Input
               label="Email"
@@ -71,14 +77,14 @@ export default class Forgot extends Component {
               defaultValue={this.state.email}
               onChangeText={text => this.setState({ email: text })}
             />
-            <Button gradient onPress={() => this.handleForgot()}>
+            <Button style={styles.btnActionActive} onPress={() => this.handleForgot()}>
               {loading ?
                 <ActivityIndicator size="small" color="white" /> :
                 <Text bold white center>Forgot</Text>
               }
             </Button>
 
-            <Button onPress={() => navigation.navigate('Login')}>
+            <Button style={styles.btnActionNonActive} onPress={() => navigation.navigate('Login')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>
@@ -103,5 +109,11 @@ const styles = StyleSheet.create({
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent,
-  }
+  },
+  btnActionActive: {
+    backgroundColor: '#07b8ae'
+  },
+  btnActionNonActive: {
+    backgroundColor: '#eeeeee'
+  },
 })

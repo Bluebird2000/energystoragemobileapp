@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView } from 'react-native';
+import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView, Platform } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { Button, Input, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
@@ -98,16 +99,22 @@ export default class SignUp extends Component {
     const hasErrors = key => errors.includes(key) ? styles.hasErrors : null;
 
     return (
-      <ScrollView  style={{ marginTop: 25 }}>
+      <ScrollView>
       <KeyboardAvoidingView behavior="padding">
         <CreateDivElement padding={[0, theme.sizes.base * 3]}>
-        <CreateDivElement center bottom flex={0.4} >
+        <CreateDivElement center bottom flex={0.4} style={{ marginBottom: 45 }} >
           <Text h1 center bold>
             Wattbank For Your
             <Text h1 primary> Home</Text>
           </Text>
         </CreateDivElement>
           <CreateDivElement middle>
+            {/* <Icon
+              name={Platform.OS === "ios" ? "ios-person-outline" : "md-person"}
+              color="#777777"
+              size={14}
+              style={{position: 'absolute', top: 37, left: 5 }}
+            /> */}
             <Input
               label="Firstname"
               error={hasErrors('firstName')}
