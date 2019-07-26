@@ -31,7 +31,7 @@ export default class SignUp extends Component {
 
     if(!errors.length) {
       this.setState({ loading: true });
-      const baseUrl = 'http://127.0.0.1:7000/energy/auth/register';
+      const baseUrl = 'http://192.168.15.254:7000/v1/energy/auth/register';
       await axios({
         url: baseUrl,
         method: 'POST',
@@ -40,7 +40,7 @@ export default class SignUp extends Component {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         }
-      }).then(response => { Alert.alert( 'Success!' + response, 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
+      }).then(response => { Alert.alert( 'Success!', 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
           { cancelable: false })
           }).catch(error => {
             Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
