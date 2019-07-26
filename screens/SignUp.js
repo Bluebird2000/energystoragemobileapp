@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView, Platform } from 'react-native';
+import { Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, ScrollView, Platform, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import axios from 'axios';
 import { Button, Input, CreateDivElement, Text } from '../components';
@@ -16,29 +16,25 @@ export default class SignUp extends Component {
     loading: false,
   }
 
-  handleSignUp() {
-    const baseUrl = 'http://41.58.77.220:7000/v1/energy/auth/register';
+  async handleSignUp() {
     const { navigation } = this.props;
     const errors = [];
-    //creating data object to be sent to API
     const { firstName, lastName, email, password, wattbankSN } = this.state;
     const payload = { firstName, lastName, email, password, wattbankSN }
-    Keyboard.dismiss();
-    this.setState({ loading: true });
 
-    // check with backend API or with some static data
     if (!firstName) errors.push('firstName');
     if (!lastName) errors.push('lastName');
     if (!email) errors.push('email');
     if (!password) errors.push('password');
     if (!wattbankSN) errors.push('wattbankSN');
-
     this.setState({ errors, loading: false });
 
-    if (!errors.length) {
-      axios({
+    if(!errors.length) {
+      this.setState({ loading: true });
+      const baseUrl = 'http://127.0.0.1:7000/energy/auth/register';
+      await axios({
         url: baseUrl,
-        method: "post",
+        method: 'POST',
         data: payload,
         headers: {
           'Accept': 'application/json',
@@ -48,50 +44,52 @@ export default class SignUp extends Component {
           { cancelable: false })
           }).catch(error => {
             Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
-          })
-      
-      // axios({
-      //   url: baseUrl,
-      //   method: "post",
-      //   data: payload,
-      //   headers: {
-      //     'Accept': 'application/json',
-      //     'Content-Type': 'application/json'
-      //   }
-      // }).then(response => {
-      //   console.log(2, response);
-      //   Alert.alert(
-      //   'Success!',
-      //   'Your account has been created',
-      //   [
-      //     {
-      //       text: 'Continue', onPress: () => {
-      //         navigation.navigate('Verification')
-      //       }
-      //     }
-      //   ],
-      //   { cancelable: false }
-      // )
-      // }).catch(error => {
-      //   console.log(1, error.response);
-      // })
-      // Alert.alert(
-      //   'Success!',
-      //   'Your account has been created',
-      //   [
-      //     {
-      //       text: 'Continue', onPress: () => {
-      //         navigation.navigate('Verification')
-      //       }
-      //     }
-      //   ],
-      //   { cancelable: false }
-      // )
+            this.setState({ loading: false });
+          });
     }
-
-
-
   }
+
+
+
+
+    // const baseUrl = 'http://41.58.82.44:7000/v1/energy/auth/register';
+    // const { navigation } = this.props;
+    // const errors = [];
+    // //creating data object to be sent to API
+    // const { firstName, lastName, email, password, wattbankSN } = this.state;
+    // const payload = { firstName, lastName, email, password, wattbankSN }
+    // Keyboard.dismiss();
+    // this.setState({ loading: true });
+
+    // // check with backend API or with some static data
+    // if (!firstName) errors.push('firstName');
+    // if (!lastName) errors.push('lastName');
+    // if (!email) errors.push('email');
+    // if (!password) errors.push('password');
+    // if (!wattbankSN) errors.push('wattbankSN');
+
+    // this.setState({ errors, loading: false });
+
+
+    // if (!errors.length) {
+    //   axios({
+    //     url: baseUrl,
+    //     method: "post",
+    //     data: payload,
+    //     headers: {
+    //       'Accept': 'application/json',
+    //       'Content-Type': 'application/json'
+    //     }
+    //   }).then(response => { Alert.alert( 'Success!' + response, 'Your account has been created', [{ text: 'Continue', onPress: () => { navigation.navigate('Verification') } }],
+    //       { cancelable: false })
+    //       }).catch(error => {
+    //         Alert.alert('Error!' + error, 'Network Error', [{ text: 'Continue', onPress: () => { navigation.navigate('') } }], { cancelable: false })
+    //       });
+    // }
+
+
+
+  // }
 
   render() {
     const { navigation } = this.props;
@@ -145,6 +143,14 @@ export default class SignUp extends Component {
               defaultValue={this.state.password}
               onChangeText={text => this.setState({ password: text })}
             />
+            {/* <Input
+              secure
+              label="Confirm password"
+              error={hasErrors('password')}
+              style={[styles.input, hasErrors('password')]}
+              defaultValue={this.state.password_confirmation}
+              onChangeText={text => this.setState({ password_confirmation: text })}
+            /> */}
             <Input
               label="WattbankSN"
               error={hasErrors('wattbankSN')}

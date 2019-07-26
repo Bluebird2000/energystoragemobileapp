@@ -12,22 +12,21 @@ export default class LoginController extends Component {
     loading: false,
   }
 
-  handleLogin() {
+  async handleLogin() {
     const { navigation } = this.props;
     const { username, password } = this.state;
     const errors = [];
     let payload = { username, password };
 
     Keyboard.dismiss();
-    this.setState({ loading: true });
 
     if (!username) errors.push('username');
     if (!password) errors.push('password');
-
     this.setState({ errors, loading: false });   
 
     if (!errors.length) {
-      axios({
+      this.setState({ loading: true });
+     await axios({
         url: "https://p-user-api-dev.quabbly.com/v1/auth/login",
         method: "post",
         data: payload,
@@ -60,7 +59,8 @@ export default class LoginController extends Component {
             }
           ],
           { cancelable: false }
-        )
+        );
+        this.setState({ loading: false });
       })
     }
 
