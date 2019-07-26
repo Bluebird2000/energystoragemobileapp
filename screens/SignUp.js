@@ -98,10 +98,15 @@ export default class SignUp extends Component {
     const hasErrors = key => errors.includes(key) ? styles.hasErrors : null;
 
     return (
-      <ScrollView>
+      <ScrollView  style={{ marginTop: 25 }}>
       <KeyboardAvoidingView behavior="padding">
-        <CreateDivElement padding={[0, theme.sizes.base * 2]}>
-          {/* <Text h1 bold>Sign Up</Text> */}
+        <CreateDivElement padding={[0, theme.sizes.base * 3]}>
+        <CreateDivElement center bottom flex={0.4} >
+          <Text h1 center bold>
+            Wattbank For Your
+            <Text h1 primary> Home</Text>
+          </Text>
+        </CreateDivElement>
           <CreateDivElement middle>
             <Input
               label="Firstname"
@@ -140,14 +145,14 @@ export default class SignUp extends Component {
               defaultValue={this.state.wattbankSN}
               onChangeText={text => this.setState({ wattbankSN: text })}
             />
-            <Button gradient onPress={() => this.handleSignUp()}>
+            <Button style={styles.btnActionActive} onPress={() => this.handleSignUp()}>
               {loading ?
                 <ActivityIndicator size="small" color="white" /> :
                 <Text bold white center>Sign Up</Text>
               }
             </Button>
 
-            <Button onPress={() => navigation.navigate('Login')}>
+            <Button  style={styles.btnActionNonActive} onPress={() => navigation.navigate('Login')}>
               <Text gray caption center style={{ textDecorationLine: 'underline' }}>
                 Back to Login
               </Text>
@@ -173,5 +178,11 @@ const styles = StyleSheet.create({
   },
   hasErrors: {
     borderBottomColor: theme.colors.accent,
-  }
+  },
+  btnActionActive: {
+    backgroundColor: '#07b8ae'
+  },
+  btnActionNonActive: {
+    backgroundColor: '#eeeeee'
+  },
 })
