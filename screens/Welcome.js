@@ -57,7 +57,7 @@ class Welcome extends Component {
           </ScrollView>
 
           <CreateDivElement middle padding={[theme.sizes.base / 2, 0]}>
-            <Button gradient onPress={() => this.setState({ showTerms: false })}>
+            <Button style={styles.btnActionActive} onPress={() => this.setState({ showTerms: false })}>
               <Text center white>I understand</Text>
             </Button>
           </CreateDivElement>
@@ -128,23 +128,28 @@ class Welcome extends Component {
     return (
       <CreateDivElement> 
         <CreateDivElement center bottom flex={0.4} >
-          {/* <Text h1 center bold>
-            Energy storage for your
+            {/* <Image
+              source={require('../assets/images/logo.png')}
+              resizeMode="contain"
+              style={{ width, height: height / 8, overflow: 'visible' }}
+            /> */}
+          <Text h1 center bold>
+            Wattbank For Your
             <Text h1 primary> Home</Text>
           </Text>
-          <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
+          {/* <Text h3 gray2 style={{ marginTop: theme.sizes.padding / 2 }}>
             Making electronics manufacturing unbiquitous
           </Text> */}
         </CreateDivElement>
-        {/* <CreateDivElement center middle>
+        <CreateDivElement center middle>
           {this.renderIllustrations()}
           {this.renderSteps()}
-        </CreateDivElement> */}
+        </CreateDivElement>
         <CreateDivElement middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
-          <Button style={styles.loginAction} onPress={() => navigation.navigate('Login')}>
+          <Button style={styles.btnActionActive} onPress={() => navigation.navigate('Login')}>
             <Text center semibold white>Login</Text>
           </Button>
-          <Button shadow onPress={() => navigation.navigate('SignUp')}>
+          <Button shadow style={styles.btnActionNonActive} onPress={() => navigation.navigate('SignUp')}>
             <Text center semibold>Signup</Text>
           </Button>
           <Button onPress={() => this.setState({ showTerms: true })}>
@@ -181,8 +186,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 2.5,
   },
-  loginAction: {
-    backgroundColor: '#00b1ac'
+  btnActionActive: {
+    backgroundColor: '#07b8ae'
+  },
+  btnActionNonActive: {
+    backgroundColor: '#eeeeee'
   },
   backgroundLanding:{
     backgroundColor: '#ffffff'
