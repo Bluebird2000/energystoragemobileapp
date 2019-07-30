@@ -73,14 +73,14 @@ export default class SignUp extends Component {
               error={hasErrors('firstName')}
               style={[styles.input, hasErrors('firstName')]}
               defaultValue={this.state.firstName}
-              onChangeText={text => this.setState({ firstName: text })}
+              onChangeText={text => this.setState({ firstName: text.trim() })}
             />
             <Input
               label="Lastname"
               error={hasErrors('lastName')}
               style={[styles.input, hasErrors('lastName')]}
               defaultValue={this.state.lastName}
-              onChangeText={text => this.setState({ lastName: text })}
+              onChangeText={text => this.setState({ lastName: text.trim() })}
             />
             <Input
               email
@@ -88,7 +88,7 @@ export default class SignUp extends Component {
               error={hasErrors('email')}
               style={[styles.input, hasErrors('email')]}
               defaultValue={this.state.email}
-              onChangeText={text => this.setState({ email: text })}
+              onChangeText={text => this.setState({ email: text.trim() })}
             />
             <Input
               secure
@@ -96,7 +96,7 @@ export default class SignUp extends Component {
               error={hasErrors('password')}
               style={[styles.input, hasErrors('password')]}
               defaultValue={this.state.password}
-              onChangeText={text => this.setState({ password: text })}
+              onChangeText={text => this.setState({ password: text.trim() })}
             />
             {/* <Input
               secure
@@ -111,7 +111,7 @@ export default class SignUp extends Component {
               error={hasErrors('wattbankSN')}
               style={[styles.input, hasErrors('wattbankSN')]}
               defaultValue={this.state.wattbankSN}
-              onChangeText={text => this.setState({ wattbankSN: text })}
+              onChangeText={text => this.setState({ wattbankSN: text.trim() })}
             />
             <Button style={styles.btnActionActive} onPress={() => this.handleSignUp()}>
               {loading ?

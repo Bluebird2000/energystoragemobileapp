@@ -56,7 +56,7 @@ class DashBoard extends Component {
           <Text h1 bold> DashBoard </Text>
           <Button onPress={() => navigation.navigate('Settings')}>
             <Image
-              // source={profile.avatar}
+              source={profile.avatar}
               style={styles.avatar}
             />
           </Button>

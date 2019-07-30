@@ -1,11 +1,54 @@
 import React, { Component } from 'react'
-import {Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import {Alert, ActivityIndicator, Keyboard, KeyboardAvoidingView, StyleSheet, AsyncStorage } from 'react-native'
 import axios from 'axios';
 import { Button, Input, CreateDivElement, Text } from '../components';
 import { theme } from '../constants';
 
 export default class LoginController extends Component {
-  state = { email: null, password: null,  errors: [], loading: false }
+  state = { email: null, password: null,  errors: [], loading: false, userData: {} }
+
+  componentDidMount() {
+    this._getUserToken();
+  }
+
+  async _storeUserToken(user) {
+    try {
+       await AsyncStorage.setItem("userData", JSON.stringify(user));
+    } catch (error) {
+      alert("Something went wrong", error);
+    }
+  }
+
+  async _getUserToken(user) {
+    try {
+      let userData = await AsyncStorage.getItem("userData");
+      let data = JSON.parse(userData);
+      console.log(data);
+    } catch (error) {
+      console.log("Something went wrong", error);
+    }
+  } 
+
+
+  async _destroySession(user) {
+      try {
+        await AsyncStorage.removeItem(user);
+        return true;
+      }
+      catch(exception) {
+        return false;
+      }
+  }
+
+  // async _destroySession(user) {
+  //   try {
+  //     let userData = await AsyncStorage.removeItem("userData");
+  //     let data = JSON.parse(userData);
+  //     console.log(data);
+  //   } catch(error) {
+  //     console.log('something went wrong deleting user session');
+  //   }
+  // }
 
   async handleLogin() {
     const { navigation } = this.props;
@@ -37,6 +80,7 @@ export default class LoginController extends Component {
           'Content-Type': 'application/json'
         },
       }).then(response => {
+        this._storeUserToken(JSON.stringify(response.data.data));
           Alert.alert(
           'Success!',
           'successfully logged in',
