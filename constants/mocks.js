@@ -15,7 +15,7 @@ const httpMock = [
   },
   {
     id: 'u-plus',
-    name: 'BATTERY PERCENTAGE',
+    name: 'BATTERY %',
     tags: ['units', 'View-consumption'],
     count: 68,
     // image: require('../assets/icons/u-plus.png')

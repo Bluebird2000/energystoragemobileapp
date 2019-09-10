@@ -40,22 +40,12 @@ export default class LoginController extends Component {
       }
   }
 
-  // async _destroySession(user) {
-  //   try {
-  //     let userData = await AsyncStorage.removeItem("userData");
-  //     let data = JSON.parse(userData);
-  //     console.log(data);
-  //   } catch(error) {
-  //     console.log('something went wrong deleting user session');
-  //   }
-  // }
-
   async handleLogin() {
     const { navigation } = this.props;
     const { username, password } = this.state;
     const errors = [];
     let payload = { username, password };
-    const baseUrl = 'http://192.168.15.254:7000/v1/energy/auth/login';    
+    const baseUrl = 'https://p-user-api-dev.quabbly.com/v1/auth/login';    
 
     Keyboard.dismiss();
 
