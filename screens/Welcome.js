@@ -56,7 +56,7 @@ class Welcome extends Component {
             </Text>
           </ScrollView>
 
-          <CreateDivElement middle padding={[theme.sizes.base / 2, 0]}>
+          <CreateDivElement middle padding={[theme.sizes.base / 4, 0]}>
             <Button style={styles.btnActionActive} onPress={() => this.setState({ showTerms: false })}>
               <Text center white>I understand</Text>
             </Button>
@@ -145,8 +145,8 @@ class Welcome extends Component {
           {this.renderIllustrations()}
           {this.renderSteps()}
         </CreateDivElement>
-        <CreateDivElement middle flex={0.5} margin={[0, theme.sizes.padding * 2]}>
-          <Button style={styles.btnActionActive} onPress={() => navigation.navigate('Login')}>
+        <CreateDivElement middle flex={0.5} margin={[0, theme.sizes.padding * 3]}>
+          <Button style={styles.btnActionActive} onPress={() => navigation.navigate('DashBoard')}>
             <Text center semibold white>Login</Text>
           </Button>
           <Button shadow style={styles.btnActionNonActive} onPress={() => navigation.navigate('SignUp')}>
@@ -187,10 +187,18 @@ const styles = StyleSheet.create({
     marginHorizontal: 2.5,
   },
   btnActionActive: {
-    backgroundColor: '#07b8ae'
+    backgroundColor: '#07b8ae',
+    // borderRadius: 60,  // Set border Radius.  
+
+    // width: 170,  // Setting up image width. 
+    // height: 170,  // Setting up image height.  
+    // borderWidth: 3,  // Set border width.  
+    // borderColor: '#07b8ae',  // Set border Hex Color code here. 
+    // borderRadius: 60,  // Set border Radius.  
   },
   btnActionNonActive: {
-    backgroundColor: '#eeeeee'
+    backgroundColor: '#eeeeee',
+    borderRadius: 60,  // Set border Radius.  
   },
   backgroundLanding:{
     backgroundColor: '#ffffff'
